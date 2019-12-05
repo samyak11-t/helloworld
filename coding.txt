@@ -1,0 +1,79 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define si(n) scanf("%d",&n)
+#define sll(n) scanf("%lld",&n)
+#define pi(k) printf("%d\n",k)
+#define pll(k) printf("%lld\n",k)
+#define ll long long int
+#define mke make_pair
+#define ff first
+#define ss second
+
+const int M=1e9+7;
+
+int mul(int a,int b)
+{
+    return (ll)a*b%M;
+}
+int power(int a ,int b)
+{
+	if(b==0)
+	return 1;
+	int temp=power(a,b/2);
+	if(b%2==0)
+	return mul(temp,temp);
+	else
+	return mul(a,mul(temp,temp));
+}
+int inv(int v)
+{
+ 	return power(v,M-2);
+}
+string s;
+int func(int n1)
+{
+	int t;
+	int max=0;
+	int max2;
+	stack<char> st;
+  for(int i=0;i<n1;i++)
+  {
+  	if(st.empty())
+  	{
+  		st.push(s[i]);
+  		t=1;
+  		max2=1;
+	}
+	else if(st.top()==s[i])
+	{
+		st.pop();
+		if(max<t-st.size())
+		{
+		max=t-st.size();
+	    }
+	}
+	else
+	{
+		st.push(s[i]);
+		if(max2<st.size())
+		max2=st.size();
+		t=max2;
+	}
+  }
+  return max;
+  
+}
+int main()
+{
+  int t;si(t);
+  while(t--)
+  {
+  	int n1;
+  	si(n1);
+  	
+  	cin>>s;
+    cout<<func(n1)<<endl;	
+  }
+
+
+}
